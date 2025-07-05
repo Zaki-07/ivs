@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Face - IVSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#1B1D36] text-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-[#14162E] h-16 flex items-center px-4 shadow">
+        <div class="text-xl font-bold">IVSS</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="p-6">
+        <div class="mb-4">
+            <h1 class="text-2xl font-bold">Register Face</h1>
+            <p class="text-sm text-gray-300">Add a new person to the face recognition system</p>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="hidden mb-4 p-4 bg-green-600 text-white rounded">
+            <span id="successText"></span>
+        </div>
+
+        <!-- Main Form -->
+        <div class="bg-[#1F213E] rounded p-6">
+            <form id="registerForm" class="space-y-4">
+                <!-- Person Name Input -->
+                <div>
+                    <label for="person_name" class="block font-semibold mb-2">Person Name:</label>
+                    <input type="text" name="person_name" id="person_name" required
+                        class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600 focus:border-blue-500 focus:outline-none"
+                        placeholder="Enter the person's full name">
+                </div>
+
+                <!-- Camera and Upload Section -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Camera Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">📷 Camera Capture</h3>
+                        
+                        <div class="bg-gray-800 rounded mb-3">
+                            <video id="video" class="w-full h-100 object-cover rounded" autoplay muted></video>
+                            <canvas id="canvas" class="hidden"></canvas>
+                        </div>
+
+                        <div class="flex space-x-2">
+                            <button type="button" id="startCamera"
+                                class="flex-1 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded text-white font-semibold">
+                                Start Camera
+                            </button>
+                            <button type="button" id="captureBtn"
+                                class="flex-1 bg-green-600 hover:bg-green-700 py-2 px-4 rounded text-white font-semibold"
+                                disabled>
+                                Capture
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Upload Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">📁 File Upload</h3>
+                        
+                        <div class="border-2 border-dashed border-gray-600 rounded p-6 text-center hover:border-gray-500">
+                            <input type="file" id="face_image" accept="image/*" class="hidden">
+                            <div id="dropZone" class="cursor-pointer">
+                                <div class="text-4xl mb-2">📤</div>
+                                <p class="text-gray-400 mb-2">Click to upload or drag and drop</p>
+                                <p class="text-sm text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Preview -->
+                <div id="previewContainer" class="hidden">
+                    <h3 class="text-lg font-semibold mb-3">Preview</h3>
+                    <div class="text-center">
+                        <img id="previewImage" class="mx-auto max-w-sm max-h-64 object-cover rounded border">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" id="submitBtn"
+                        class="w-full bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>
+                        Register Face
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-[#1F213E] rounded p-8 text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto mb-4"></div>
+            <p class="text-gray-300">Processing face registration...</p>
+        </div>
+    </div>
+
+    <script>
+        let video = document.getElementById('video');
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        let capturedImage = null;
+        let stream = null;
+
+        // DOM elements
+        const startCameraBtn = document.getElementById('startCamera');
+        const captureBtn = document.getElementById('captureBtn');
+        const fileInput = document.getElementById('face_image');
+        const dropZone = document.getElementById('dropZone');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImage = document.getElementById('previewImage');
+        const submitBtn = document.getElementById('submitBtn');
+        const personNameInput = document.getElementById('person_name');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const successMessage = document.getElementById('successMessage');
+        const successText = document.getElementById('successText');
+
+        // Start camera
+        startCameraBtn.addEventListener('click', async () => {
+            try {
+                console.log("🔍 Looking for real camera...");
+
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const cameras = devices.filter(d => d.kind === 'videoinput');
+                const realCamera = cameras.find(cam => !cam.label.toLowerCase().includes("droidcam"));
+
+                if (!realCamera) {
+                    alert("No valid camera found (DroidCam was ignored).");
+                    return;
+                }
+
+                console.log("✅ Using camera:", realCamera.label);
+
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: { deviceId: { exact: realCamera.deviceId } }
+                });
+
+                console.log("📷 Stream ready:", stream);
+
+                video.srcObject = stream;
+                await video.play();
+
+                console.log("✅ Camera should now be playing");
+
+                captureBtn.disabled = false;
+                startCameraBtn.textContent = 'Camera Active';
+                startCameraBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                startCameraBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+            } catch (err) {
+                alert('Error accessing camera: ' + err.message);
+                console.error(err);
+            }
+        });
+
+        // Capture image
+        captureBtn.addEventListener('click', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+
+            canvas.toBlob(blob => {
+                capturedImage = blob;
+                const url = URL.createObjectURL(blob);
+                showPreview(url);
+            }, 'image/jpeg', 0.9);
+        });
+
+        // File upload
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                capturedImage = file;
+                const url = URL.createObjectURL(file);
+                showPreview(url);
+            }
+        });
+
+        // Drag and drop
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.parentElement.classList.add('border-gray-500');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.parentElement.classList.remove('border-gray-500');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.parentElement.classList.remove('border-gray-500');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                capturedImage = file;
+                const url = URL.createObjectURL(file);
+                showPreview(url);
+            }
+        });
+
+        // Show preview
+        function showPreview(url) {
+            previewImage.src = url;
+            previewContainer.classList.remove('hidden');
+            updateSubmitButton();
+        }
+
+        // Update submit button state
+        function updateSubmitButton() {
+            const hasName = personNameInput.value.trim() !== '';
+            const hasImage = capturedImage !== null;
+            submitBtn.disabled = !(hasName && hasImage);
+        }
+
+        personNameInput.addEventListener('input', updateSubmitButton);
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!capturedImage || !personNameInput.value.trim()) {
+                alert('Please provide both a name and an image.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('person_name', personNameInput.value.trim());
+            formData.append('face_image', capturedImage);
+
+            loadingOverlay.classList.remove('hidden');
+
+            try {
+                const response = await fetch('/register_face', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.text();
+
+                if (response.ok) {
+                    showSuccess('Face registered successfully!');
+                    resetForm();
+                } else {
+                    throw new Error(result);
+                }
+            } catch (error) {
+                alert('Error registering face: ' + error.message);
+            } finally {
+                loadingOverlay.classList.add('hidden');
+            }
+        });
+
+        // Show success message
+        function showSuccess(message) {
+            successText.textContent = message;
+            successMessage.classList.remove('hidden');
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Reset form
+        function resetForm() {
+            personNameInput.value = '';
+            capturedImage = null;
+            previewContainer.classList.add('hidden');
+            fileInput.value = '';
+
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+
+            video.srcObject = null;
+            captureBtn.disabled = true;
+            startCameraBtn.textContent = 'Start Camera';
+            startCameraBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            startCameraBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            updateSubmitButton();
+        }
+
+        // Initial state
+        updateSubmitButton();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+# Ignore alerts database file
+alerts.db
+alert_frame_cam0.jpg
+object_detection_cam0.jpg
+env
+yolo11m.pt
+yolov8n.pt
+face recognition training
+datasets
+dataset
+destination
+*.dat
+__pycache__
+copycode.ipynb

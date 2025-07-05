@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}IVSS Dashboard{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css', _t=1687165323) }}" /> -->
+     <link rel="stylesheet" href="IVSS\static\css\styles.css"/>
+  </head>
+  <body class="bg-[#1B1D36] text-gray-100 min-h-screen flex flex-col">
+    <nav class="bg-[#14162E] h-16 flex items-center px-4 shadow">
+      <div class="text-xl font-bold">IVSS</div>
+    </nav>
+    <div class="flex flex-1">
+      <aside class="bg-[#14162E] w-64 p-4 flex flex-col space-y-4">
+        <div class="text-2xl font-bold mb-4">IVSS</div>
+        <a href="{{ url_for('dashboard') }}" class="block py-2 px-3 rounded hover:bg-[#1F213E]">Dashboard</a>
+        <a href="{{ url_for('live_monitoring') }}" class="block py-2 px-3 rounded hover:bg-[#1F213E]">Live Monitoring</a>
+        <a href="{{ url_for('alerts') }}" class="block py-2 px-3 rounded hover:bg-[#1F213E]">Alerts & Notifications</a>
+        <a href="{{ url_for('analytics') }}" class="block py-2 px-3 rounded hover:bg-[#1F213E]">Analytics</a>
+        <a href="{{ url_for('settings') }}" class="block py-2 px-3 rounded hover:bg-[#1F213E]">System Settings</a>
+        <a href="{{ url_for('register_face') }}" class="block py-2 px-3 rounded hover:bg-[#1F213E]">Face Registration</a>
+      </aside>
+      <main class="flex-1 p-6 overflow-auto">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}System Settings - IVSS{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-2">System Settings</h1>
+<p class="text-sm text-gray-300 mb-4">Configure each camera feed’s source and detections.</p>
+
+<form id="settings-form" class="space-y-4">
+  <div id="camera-settings-container">
+    <!-- The JavaScript below will populate this container -->
+  </div>
+  <button type="button" id="add-camera" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Add Camera</button>
+  <br>
+  <button type="button" id="save-settings" class="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Save Settings</button>
+  <p id="save-status" class="mt-2 text-green-400"></p>
+</form>
+
+<script>
+  // Get the saved settings from the server.
+  let cameras = {{ cameras_json|safe }};
+  // Ensure we have at least one camera.
+  if (!Array.isArray(cameras) || cameras.length === 0) {
+    cameras = [{ source: "0", detections: ["motion", "object", "face"] }];
+  }
+
+  const container = document.getElementById('camera-settings-container');
+
+  function renderCameraSettings() {
+    container.innerHTML = "";
+    cameras.forEach((cam, index) => {
+      const div = document.createElement('div');
+      div.className = "p-4 bg-[#1F213E] rounded mb-2";
+      div.innerHTML = `
+        <label class="block mb-1 font-semibold">Camera ${index + 1} Source:</label>
+        <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200" value="${cam.source}" data-index="${index}" data-field="source">
+        <div class="mt-2">
+          <span class="font-semibold">Detections:</span><br>
+          <label class="inline-flex items-center mt-1">
+            <input type="checkbox" class="form-checkbox" data-index="${index}" data-field="motion" ${cam.detections.includes("motion") ? "checked" : ""}>
+            <span class="ml-2">Motion</span>
+          </label>
+          <label class="inline-flex items-center ml-4 mt-1">
+            <input type="checkbox" class="form-checkbox" data-index="${index}" data-field="object" ${cam.detections.includes("object") ? "checked" : ""}>
+            <span class="ml-2">Object</span>
+          </label>
+          <label class="inline-flex items-center ml-4 mt-1">
+            <input type="checkbox" class="form-checkbox" data-index="${index}" data-field="face" ${cam.detections.includes("face") ? "checked" : ""}>
+            <span class="ml-2">Face</span>
+          </label>
+          ${index != 0 ? `<button type="button" class="delete-camera bg-red-600 hover:bg-red-700 px-2 py-1 rounded mt-2" data-index="${index}">Delete Camera</button>` : ""}
+        </div>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  renderCameraSettings();
+
+  // Add a new camera row.
+  document.getElementById('add-camera').addEventListener('click', () => {
+    cameras.push({ source: "", detections: [] });
+    renderCameraSettings();
+  });
+
+  // Delete a camera row (cannot delete first camera).
+  container.addEventListener('click', (e) => {
+    if (e.target && e.target.classList.contains('delete-camera')) {
+      const index = e.target.getAttribute('data-index');
+      if (index != 0) {
+        cameras.splice(index, 1);
+        renderCameraSettings();
+      }
+    }
+  });
+
+  // Save settings.
+  document.getElementById('save-settings').addEventListener('click', () => {
+    // Only select text inputs and checkboxes (exclude delete buttons)
+    const textInputs = document.querySelectorAll('input[type="text"][data-index]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-index]');
+    const dataByIndex = {};
+
+    textInputs.forEach(input => {
+      const idx = input.getAttribute('data-index');
+      dataByIndex[idx] = dataByIndex[idx] || {};
+      dataByIndex[idx].source = input.value;
+    });
+
+    checkboxes.forEach(cb => {
+      const idx = cb.getAttribute('data-index');
+      dataByIndex[idx] = dataByIndex[idx] || {};
+      dataByIndex[idx].detections = dataByIndex[idx].detections || [];
+      if (cb.checked) {
+        dataByIndex[idx].detections.push(cb.getAttribute('data-field'));
+      }
+    });
+
+    // Convert to array sorted by index.
+    let updatedCameras = [];
+    Object.keys(dataByIndex).sort((a, b) => a - b).forEach(key => {
+      updatedCameras.push(dataByIndex[key]);
+    });
+    // Ensure the first camera always has a source.
+    if (!updatedCameras[0].source) {
+      updatedCameras[0].source = "0";
+    }
+    cameras = updatedCameras;
+
+    fetch('/api/save_camera_settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cameras })
+    })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('save-status').textContent = "Settings saved successfully!";
+      // Reload page to load persisted settings.
+      location.reload();
+    })
+    .catch(error => {
+      console.error('Error saving settings:', error);
+      document.getElementById('save-status').textContent = "Error saving settings.";
+    });
+  });
+</script>
+{% endblock %}
+

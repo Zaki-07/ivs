@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - IVSS{% endblock %}
+{% block content %}
+<div class="mb-4">
+  <h1 class="text-2xl font-bold">Surveillance Dashboard</h1>
+  <p class="text-sm text-gray-300">Real-time monitoring and surveillance system</p>
+</div>
+
+<!-- Multi-Camera Live Feed Preview -->
+<div class="grid grid-cols-1 md:grid-cols-{{ camera_ids|length }} gap-4 mb-6">
+  {% for cam in camera_ids %}
+  <div class="bg-[#1F213E] rounded p-4">
+    <h2 class="text-xl font-semibold mb-2">Camera {{ loop.index }}</h2>
+    <img src="{{ url_for('video_feed', cam_id=loop.index0) }}" class="w-full rounded border" alt="Live Feed">
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Dashboard Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+  <div class="bg-[#1F213E] rounded p-4">
+    <div class="flex items-center space-x-2">
+      <span class="text-2xl">📷</span>
+      <h2 class="text-xl font-semibold">Active Cameras</h2>
+    </div>
+    <p id="active-cameras" class="mt-2 text-4xl font-bold">{{ camera_ids|length }}</p>
+  </div>
+  <div class="bg-[#1F213E] rounded p-4">
+    <div class="flex items-center space-x-2">
+      <span class="text-2xl">🔍</span>
+      <h2 class="text-xl font-semibold">Motion Detected</h2>
+    </div>
+    <p id="motion-detected" class="mt-2 text-4xl font-bold">0</p>
+  </div>
+  <div class="bg-[#1F213E] rounded p-4">
+    <div class="flex items-center space-x-2">
+      <span class="text-2xl">⚠️</span>
+      <h2 class="text-xl font-semibold">Security Alerts</h2>
+    </div>
+    <p id="security-alerts" class="mt-2 text-4xl font-bold">0</p>
+  </div>
+  <div class="bg-[#1F213E] rounded p-4">
+    <div class="flex items-center space-x-2">
+      <span class="text-2xl">💾</span>
+      <h2 class="text-xl font-semibold">Storage</h2>
+    </div>
+    <p id="storage" class="mt-2 text-4xl font-bold">80%</p>
+  </div>
+</div>
+
+<script>
+  function updateDashboardStats() {
+    fetch('/api/dashboard_stats')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('active-cameras').textContent = data.active_cameras;
+        document.getElementById('motion-detected').textContent = data.motion_detected;
+        document.getElementById('security-alerts').textContent = data.security_alerts;
+        document.getElementById('storage').textContent = data.storage_usage + '%';
+      })
+      .catch(error => console.error('Error fetching dashboard stats:', error));
+  }
+  setInterval(updateDashboardStats, 5000);
+  updateDashboardStats();
+</script>
+{% endblock %}
+
