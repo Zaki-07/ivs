@@ -113,7 +113,7 @@ import numpy as np
 import time
 import os
 
-def object_detection_process(shm_name, shape, output_queue, cam_id):
+def object_detection_process(shm_name, shape, output_queue, cam_id,objectThreshold):
     """
     Continuously reads frames from shared memory, runs YOLO object detection,
     and outputs detections via the output_queue. Also draws bounding boxes and
@@ -153,7 +153,7 @@ def object_detection_process(shm_name, shape, output_queue, cam_id):
 
         try:
             # print(frame)
-            results = model.predict(frame, imgsz=320, verbose=False,conf=0.7)
+            results = model.predict(frame, imgsz=320, verbose=False,conf=objectThreshold)
         except Exception as e:
             print(f"[ERROR] YOLO prediction failed for camera {cam_id}: {e}")
             continue

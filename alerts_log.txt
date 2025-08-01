@@ -1,0 +1,88 @@
+[2025-07-10 09:51:27] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 76800 | Image: None
+[2025-07-10 09:51:32] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:51:37] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 8118 | Image: None
+[2025-07-10 09:51:42] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:51:47] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 6403 | Image: None
+[2025-07-10 09:51:52] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:52:07] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 1725 | Image: None
+[2025-07-10 09:52:11] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:52:17] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 1061 | Image: None
+[2025-07-10 09:52:39] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:52:46] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 491 | Image: None
+[2025-07-10 09:52:50] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:52:54] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 346 | Image: None
+[2025-07-10 09:53:00] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 1875 | Image: None
+[2025-07-10 09:53:04] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:53:10] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 43517 | Image: None
+[2025-07-10 09:53:20] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 2342 | Image: None
+[2025-07-10 09:53:30] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 3048 | Image: None
+[2025-07-10 09:53:39] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:53:44] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 133 | Image: None
+[2025-07-10 09:53:49] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-10 09:53:54] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 909 | Image: None
+[2025-07-10 09:54:04] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 118 | Image: None
+[2025-07-10 09:54:14] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 1295 | Image: None
+[2025-07-10 09:54:24] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 459 | Image: None
+[2025-07-10 09:54:34] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 981 | Image: None
+[2025-07-10 09:54:44] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 360 | Image: None
+[2025-07-10 09:54:54] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 119 | Image: None
+[2025-07-10 09:55:04] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 446 | Image: None
+[2025-07-10 09:55:14] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 6848 | Image: None
+[2025-07-10 09:55:24] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 735 | Image: None
+[2025-07-10 09:55:34] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 531 | Image: None
+[2025-07-10 09:55:44] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 160 | Image: None
+[2025-07-10 09:55:54] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 133 | Image: None
+[2025-07-10 09:56:05] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 131 | Image: None
+[2025-07-10 09:56:19] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 200 | Image: None
+[2025-07-10 09:56:29] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 763 | Image: None
+[2025-07-10 09:56:33] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-10 09:56:39] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 117 | Image: None
+[2025-07-10 09:56:43] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-10 09:56:49] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 120 | Image: None
+[2025-07-10 09:56:53] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-10 09:56:59] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 138 | Image: None
+[2025-07-10 09:57:03] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-10 09:57:09] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 112 | Image: None
+[2025-07-10 09:57:13] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-10 09:57:19] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 206 | Image: None
+[2025-07-10 09:57:24] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-10 09:57:29] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 268 | Image: None
+[2025-07-16 10:27:02] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-16 10:38:04] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-16 11:38:03] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-16 11:38:45] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-16 11:39:08] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-16 11:39:19] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-16 11:39:29] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-16 11:39:39] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Unknown | Image: None
+[2025-07-25 09:07:35] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 76800 | Image: None
+[2025-07-25 09:07:43] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:07:47] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 76800 | Image: None
+[2025-07-25 09:07:50] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:07:54] FACE ALERT - Camera: 0 | Severity: high | Message: Face detected: Samyak | Image: None
+[2025-07-25 09:07:58] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 76800 | Image: None
+[2025-07-25 09:08:00] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:08:08] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 283 | Image: None
+[2025-07-25 09:08:10] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:08:18] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 610 | Image: None
+[2025-07-25 09:08:20] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:08:28] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 780 | Image: None
+[2025-07-25 09:08:30] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:08:38] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 104 | Image: None
+[2025-07-25 09:08:40] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:08:48] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 110 | Image: None
+[2025-07-25 09:08:51] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:08:58] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 135 | Image: None
+[2025-07-25 09:09:00] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:09:08] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 120 | Image: None
+[2025-07-25 09:09:10] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:09:18] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 107 | Image: None
+[2025-07-25 09:09:20] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:49:24] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 76800 | Image: None
+[2025-07-25 09:49:26] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:49:34] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 170 | Image: None
+[2025-07-25 09:49:36] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:49:44] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 661 | Image: None
+[2025-07-25 09:49:46] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path
+[2025-07-25 09:49:54] MOTION ALERT - Camera: 0 | Severity: medium | Message: Motion detected with score 203 | Image: None
+[2025-07-25 09:49:56] OBJECT ALERT - Camera: 0 | Severity: high | Message: Object detected: person | Image: image_path

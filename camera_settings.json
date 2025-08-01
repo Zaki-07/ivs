@@ -1,1 +1,1 @@
-[{"source": "0", "detections": ["motion", "object", "face"]}]
+[{"source": "0", "detections": ["face"], "objectThreshold": 0.5, "motionThreshold": 30}]
