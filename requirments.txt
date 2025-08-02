@@ -22,3 +22,5 @@ flask_login
 flask_sqlalchemy
 flask_migrate
 python-dotenv
+opencv-python-headless
+filetype
