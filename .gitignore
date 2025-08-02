@@ -12,3 +12,5 @@ destination
 *.dat
 __pycache__
 copycode.ipynb
+# ignore .env files
+.env
